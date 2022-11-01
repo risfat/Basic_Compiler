@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.3.5/split.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-language_tools.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <title>PyCompiler</title>
+
+  </head>
+
+<body onresize="onResize()">
+
+<div class="container" align="center">
+<br><br><br>
+  <h1 style="font-family: fantasy;">BroLang</h1>
+  <h2>A Simple Programming Language</h2>
+  <br><br><br>
+</div>
+
+
+
+  <header>
+    <div id="navigation">
+      <div class="btn-group-md" role="group" aria-label="Run Save Share Settings Group">
+        <button class="btn btn-outline-primary" id="run" onclick="Run()" type="submit"><i class="fa fa-play" aria-hidden="true"></i><span class="d-none d-md-inline-block">Run</span></button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-secondary dropdown-toggle" id="save" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cloud" aria-hidden="true"></i><span class="d-none d-md-inline-block">Save</span></button>
+          <div class="dropdown-menu" aria-labelledby="save">
+            <button class="dropdown-item" id="download">Download</button>
+            <button class="dropdown-item" id="savepublic">Save Public</button>
+            <button class="dropdown-item" id="saveprivate">Save Private</button>
+          </div>
+        </div>
+        <button class="btn btn-outline-secondary" id="settings" type="submit" data-toggle="modal" data-target="#settingsModal"><i class="fa fa-cog" aria-hidden="true"></i><span class="d-none d-md-inline-block">Settings</span></button>
+        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="settingsModalLabel">Settings</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Editor</a></li>
+                  <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Layout</a></li>
+                  <li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Theme</a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Customize Editor Settings</div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Select Layout</div>
+                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Select Theme</div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary save" type="button">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<br>
+  <div class="container">
+    <div id="root"><br><br><br><br><br><br>
+    <div id="panel">
+      <h3 align="center"><u>Examples</u></h3>
+       <br> <br>
+      <p>var1=10</p>
+      <p>var2=12</p>
+      <p>var3=30</p>
+      <p>var4=50</p>
+      <p>sum=var1+var2+var3+var4</p>
+      <p>avg=sum/4</p>
+
+    </div>
+    <div id="ide">
+      <div id="editor" data-mode="javascript">
+   a=5
+   b=5
+   c=a+b
+   c</div>
+      <iframe id="console">
+      </iframe>
+    </div>
+  </div>
+  </div>
+
+
+<footer class="bg-dark text-center text-white fixed-bottom">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/its.risfat/" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/risfat/" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/risfat/" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white" href="https://www.facebook.com/its.risfat/">MD Risfat Amin</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+<script src="{% static 'script.js' %}"></script>
+
+<script>
+  function Run(){
+
+        var console = $("#console").contents().find('body');
+        var editor = ace.edit("editor");
+        var inputCode = editor.getSession().getValue();
+
+        $.ajax({
+          type: "POST",
+          url: "ajax/runcode",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          data: {
+            code: inputCode
+          },
+
+          success: function( result ) {
+            console.html('<p style="color:white; padding:20px;"> => '+result["result"]+'</p>');
+          }
+        });
+
+  }
+</script>
+</body>
+</html>
